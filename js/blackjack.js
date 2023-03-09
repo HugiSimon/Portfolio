@@ -29,7 +29,7 @@ let croupierCards = []; // Tableau contenant les cartes du croupier
 let packet = []; // Tableau contenant les cartes du paquet
 
 let allReady = false; // Booléen indiquant si le jeu est déjà distribué
-
+let etat = "en attente"; // Etat de la partie (en cours, gagné, perdu, égalité, en attente)
 
 // Fonctions pack de cartes
 function createPack() {
@@ -64,8 +64,10 @@ function distributeCards(pack, n) {
 }
 
 function reFillPack() {
-    packet = createPack();
-    packet = shufflePack(packet);
+    let pack = [];
+    pack = createPack();
+    pack = shufflePack(pack);
+    return pack;
 }
 
 // Fonctions resulats
@@ -102,7 +104,7 @@ function blackjack(cards) {
 function startGame() {
     if (!allReady) {
         if (packet.length < 10) {
-            reFillPack();
+            packet = reFillPack();
         }
         playerCards = distributeCards(packet, 1);
         croupierCards = distributeCards(packet, 1);
@@ -136,8 +138,8 @@ function hit() {
             console.log("Vous avez perdu !")
             allReady = false;
         } else if (blackjack(playerCards)) {
-            console.log("Blackjack ! Vous avez gagné !")
-            allReady = false;
+            console.log("Blackjack !")
+            stand();
         }
     }
 }
@@ -149,7 +151,7 @@ function stand() {
         }
         if (bust(croupierCards)) {
             console.log("Le croupier a perdu !")
-        } else if (blackjack(croupierCards)) {
+        } else if (blackjack(croupierCards) && blackjack(playerCards) === false) {
             console.log("Blackjack ! Le croupier a gagné !")
         } else if (getCardValue(playerCards) > getCardValue(croupierCards)) {
             console.log("Vous avez gagné !")
