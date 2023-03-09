@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Verve.ttf";
+    src: url('../font/Verve.ttf');
+}
+
 body{
     background-color: #004032;
     color: #fff;
@@ -9,15 +14,24 @@ body{
     overflow: hidden;
 }
 
-#titlePrincipal{
-    font-size: 34.8vw;
+#titreNom, .cestCirculise{
+    color: #c7082b;
+    text-transform: uppercase;
+    font-family: "Verve.ttf", sans-serif;
+    font-size: 7em;
+    
+}
+
+.cestCirculise{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+#leTitre{
+    margin: auto;
+    width: 50%;
     text-align: center;
-    opacity: 0.1;
-    margin: 0;
-    margin-left: -3vw;
-    margin-top: -13vw;
-    padding: 0;
-    position: absolute;
+    transform: translateY(50%);
 }
 
 .rectangle{
@@ -25,10 +39,37 @@ body{
     width: 58mm;
     border: #ecb900 8px solid;
     border-radius: 3px;
-}
-
-#playerHolder{
     position: absolute;
     left: 44%;
     bottom: 5%;
+}
+
+.carteDos{
+    height: 95mm; /* ratio 1.53*/
+    width: 60mm;
+    position: absolute;
+    left: 44.2%;
+    bottom: 5%;
+    z-index: 1;
+    border-radius: 5px;
+
+    /*animation: carteDos 1s cubic-bezier(0.21, 0.83, 0.24, 1);*/
+}
+
+@keyframes carteDos{
+    0%{
+        transform: translateY(-300%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes recupCarte{
+    0%{
+        transform: translateY(0%);
+    }
+    100%{
+        transform: translateY(300%);
+    }
 }
