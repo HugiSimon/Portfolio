@@ -1,3 +1,4 @@
+// Class 
 class Carte {
     constructor(couleur, valeur) {
         this.couleur = couleur;
@@ -22,12 +23,15 @@ class ProjectInCarte {
     }
 }
 
+// Variables globales
 let playerCards = []; // Tableau contenant les cartes du joueur
 let croupierCards = []; // Tableau contenant les cartes du croupier
 let packet = []; // Tableau contenant les cartes du paquet
 
 let allReady = false; // Booléen indiquant si le jeu est déjà distribué
 
+
+// Fonctions pack de cartes
 function createPack() {
     let pack = [];
     let couleurs = ["coeur", "carreau", "pique", "trefle"];
@@ -59,6 +63,12 @@ function distributeCards(pack, n) {
     return cards;
 }
 
+function reFillPack() {
+    packet = createPack();
+    packet = shufflePack(packet);
+}
+
+// Fonctions resulats
 function getCardValue(cards) {
     let value = 0;
     let hasAce = false;
@@ -78,10 +88,6 @@ function getCardValue(cards) {
     return value;
 }
 
-function reFillPack() {
-    packet = createPack();
-    packet = shufflePack(packet);
-}
 
 function bust(cards) {
     return getCardValue(cards) > 21;
@@ -89,6 +95,37 @@ function bust(cards) {
 
 function blackjack(cards) {
     return getCardValue(cards) === 21;
+}
+
+
+// Fonctions jeu
+function startGame() {
+    if (!allReady) {
+        if (packet.length < 10) {
+            reFillPack();
+        }
+        playerCards = distributeCards(packet, 1);
+        croupierCards = distributeCards(packet, 1);
+        playerCards.push(distributeCards(packet, 1)[0]);
+        croupierCards.push(distributeCards(packet, 1)[0]);
+        allReady = true;
+
+        afficheCards(playerCards, "joueur");
+        afficheCards(croupierCards, "cache");
+
+        if (blackjack(playerCards) && blackjack(croupierCards)) {
+            console.log("Égalité !")
+            allReady = false;
+        } else if (blackjack(playerCards)) {
+            console.log("Blackjack ! Vous avez gagné !")
+            allReady = false;
+        } else if (blackjack(croupierCards)) {
+            console.log("Blackjack ! Le croupier a gagné !")
+            allReady = false;
+        }
+    } else {
+        console.log("La partie est déjà lancée !")
+    }
 }
 
 function hit() {
@@ -136,6 +173,7 @@ function double() {
     }
 }
 
+// Fonction affichage
 function afficheCards(cards, etat) {
     let text = "";
     if (etat === "joueur") {
@@ -157,33 +195,4 @@ function afficheCards(cards, etat) {
         text += cards[0].valeur + " de " + cards[0].couleur + " et une carte cachée, avec un score de " + getCardValue([cards[0]]) + " points.";
     }
     console.log(text);
-}
-
-function startGame() {
-    if (!allReady) {
-        if (packet.length < 10) {
-            reFillPack();
-        }
-        playerCards = distributeCards(packet, 1);
-        croupierCards = distributeCards(packet, 1);
-        playerCards.push(distributeCards(packet, 1)[0]);
-        croupierCards.push(distributeCards(packet, 1)[0]);
-        allReady = true;
-
-        afficheCards(playerCards, "joueur");
-        afficheCards(croupierCards, "cache");
-
-        if (blackjack(playerCards) && blackjack(croupierCards)) {
-            console.log("Égalité !")
-            allReady = false;
-        } else if (blackjack(playerCards)) {
-            console.log("Blackjack ! Vous avez gagné !")
-            allReady = false;
-        } else if (blackjack(croupierCards)) {
-            console.log("Blackjack ! Le croupier a gagné !")
-            allReady = false;
-        }
-    } else {
-        console.log("La partie est déjà lancée !")
-    }
 }
