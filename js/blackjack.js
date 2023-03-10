@@ -23,12 +23,20 @@ class ProjectInCarte {
     }
 }
 
+function sleep(milliseconds){
+    return new Promise(resolve => {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+
 // Variables globales
 let playerCards = []; // Tableau contenant les cartes du joueur
 let croupierCards = []; // Tableau contenant les cartes du croupier
 let packet = []; // Tableau contenant les cartes du paquet
 
 let allReady = false; // Booléen indiquant si le jeu est déjà distribué
+let attent = false; // Booléen indiquant si le joueur est en attente de la fin de l'animation
 let etat = "en attente"; // Etat de la partie (en cours, gagné, perdu, égalité, en attente)
 
 // Fonctions pack de cartes
@@ -101,16 +109,23 @@ function blackjack(cards) {
 
 
 // Fonctions jeu
-function startGame() {
+async function startGame() {
     if (!allReady) {
+        allReady = true;
+        attent = true;
         if (packet.length < 10) {
             packet = reFillPack();
         }
         playerCards = distributeCards(packet, 1);
+        createCarte();  
         croupierCards = distributeCards(packet, 1);
+        await sleep(500);
         playerCards.push(distributeCards(packet, 1)[0]);
+        createCarte();
         croupierCards.push(distributeCards(packet, 1)[0]);
-        allReady = true;
+        await sleep(1000);
+        recupCarte();
+        attent = false;
 
         afficheCards(playerCards, "joueur");
         afficheCards(croupierCards, "cache");
@@ -130,9 +145,12 @@ function startGame() {
     }
 }
 
-function hit() {
+async function hit() {
+    if (attent) return;
     if (allReady) {
+        attent = true;
         playerCards.push(distributeCards(packet, 1)[0]);
+        createCarte();
         afficheCards(playerCards, "joueur");
         if (bust(playerCards)) {
             console.log("Vous avez perdu !")
@@ -141,6 +159,9 @@ function hit() {
             console.log("Blackjack !")
             stand();
         }
+        await sleep(1000);
+        recupCarte();
+        attent = false;
     }
 }
 
