@@ -65,12 +65,46 @@ async function recupCarte() {
     }
 }
 
-function iconCentre(n) {
+function spawnCarteMain(num, val, combientieme) {
+    let laCarte = document.createElement("div");
+
+    laCarte.appendChild(document.createElement("p"));
+    laCarte.children[0].innerHTML = num;
+
+    laCarte.appendChild(document.createElement("img"));
+    laCarte.children[1].src = "../img/" + val +".png";
+
+    laCarte.appendChild(document.createElement("div"));
+    laCarte.children[2].classList.add("icon-entre");
+    laCarte.children[2].classList.add(num + "num");
+
+    laCarte.appendChild(document.createElement("img"));
+    laCarte.children[3].src = "../img/" + val +".png";
+
+    laCarte.appendChild(document.createElement("p"));
+    laCarte.children[4].innerHTML = num;
+
+    if(val === "heart" || val === "diamonds") {
+        laCarte.children[0].style.color = "#dc2021";
+        laCarte.children[4].style.color = "#dc2021";
+    }
+
+    laCarte.children[0].classList.add("num-cards");
+    laCarte.children[4].classList.add("num-cards-upside");
+    laCarte.children[1].classList.add("icon-cards");
+    laCarte.children[3].classList.add("icon-cards-upside");
+
+    laCarte.classList.add("carteFace");
+    document.body.appendChild(laCarte);
+    iconCentre(combientieme, val);
+}
+
+function iconCentre(n, val) {
     let num = parseInt(document.getElementsByClassName("icon-entre")[n].classList[1]);
     let icons = [];
     for (let i = 0; i < num; i++) {
         let icon = document.createElement("img");
-        icon.src = "../img/clubs.png";
+        icon.src = "../img/" + val + ".png";
         document.getElementsByClassName("icon-entre")[n].appendChild(icon);
         icons.push(icon);
     }

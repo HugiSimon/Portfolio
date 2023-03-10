@@ -42,7 +42,7 @@ let etat = "en attente"; // Etat de la partie (en cours, gagné, perdu, égalit�
 // Fonctions pack de cartes
 function createPack() {
     let pack = [];
-    let couleurs = ["coeur", "carreau", "pique", "trefle"];
+    let couleurs = ["heart", "diamonds", "spades", "clubs"];
     let valeurs = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "V", "D", "R"];
     for (let i = 0; i < couleurs.length; i++) {
         for (let j = 0; j < valeurs.length; j++) {
