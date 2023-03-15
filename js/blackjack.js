@@ -111,6 +111,7 @@ function blackjack(cards) {
 // Fonctions jeu
 async function startGame() {
     if (!allReady) {
+        cleanBoard();
         allReady = true;
         attent = true;
         if (packet.length < 10) {
@@ -125,6 +126,10 @@ async function startGame() {
         croupierCards.push(distributeCards(packet, 1)[0]);
         await sleep(1000);
         recupCarte();
+        await sleep(1000);
+        spawnCarteMain(parseInt(playerCards[0].valeur), playerCards[0].couleur, 0);
+        spawnCarteMain(parseInt(playerCards[1].valeur), playerCards[1].couleur, 1);
+        organiser();
         attent = false;
 
         afficheCards(playerCards, "joueur");
@@ -161,6 +166,9 @@ async function hit() {
         }
         await sleep(1000);
         recupCarte();
+        await sleep(1000);
+        spawnCarteMain(parseInt(playerCards[playerCards.length - 1].valeur), playerCards[playerCards.length - 1].couleur, playerCards.length - 1);
+        organiser();
         attent = false;
     }
 }
