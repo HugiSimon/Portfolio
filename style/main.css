@@ -116,6 +116,12 @@ body{
     position: absolute;
 }
 
+.icon-entre .image-icon-entre{
+    width: 50mm;
+    top: 10.5%;
+    left: 14%;
+}
+
 .carteCroupier{
     height: 40mm;
     width: 30mm;

@@ -43,7 +43,7 @@ let etat = "en attente"; // Etat de la partie (en cours, gagné, perdu, égalit�
 function createPack() {
     let pack = [];
     let couleurs = ["heart", "diamonds", "spades", "clubs"];
-    let valeurs = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "V", "D", "R"];
+    let valeurs = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
     for (let i = 0; i < couleurs.length; i++) {
         for (let j = 0; j < valeurs.length; j++) {
             pack.push(new Carte(couleurs[i], valeurs[j]));
@@ -86,7 +86,7 @@ function getCardValue(cards) {
         if (cards[i].valeur === "1") {
             hasAce = true;
         }
-        if (cards[i].valeur === "V" || cards[i].valeur === "D" || cards[i].valeur === "R") {
+        if (cards[i].valeur === "J" || cards[i].valeur === "Q" || cards[i].valeur === "K") {
             value += 10;
         } else {
             value += parseInt(cards[i].valeur);
@@ -127,8 +127,8 @@ async function startGame() {
         await sleep(1000);
         recupCarte();
         await sleep(1000);
-        spawnCarteMain(parseInt(playerCards[0].valeur), playerCards[0].couleur, 0);
-        spawnCarteMain(parseInt(playerCards[1].valeur), playerCards[1].couleur, 1);
+        spawnCarteMain(playerCards[0].valeur, playerCards[0].couleur, 0);
+        spawnCarteMain(playerCards[1].valeur, playerCards[1].couleur, 1);
         organiser();
         attent = false;
 
@@ -167,7 +167,7 @@ async function hit() {
         await sleep(1000);
         recupCarte();
         await sleep(1000);
-        spawnCarteMain(parseInt(playerCards[playerCards.length - 1].valeur), playerCards[playerCards.length - 1].couleur, playerCards.length - 1);
+        spawnCarteMain(playerCards[playerCards.length - 1].valeur, playerCards[playerCards.length - 1].couleur, playerCards.length - 1);
         organiser();
         attent = false;
     }

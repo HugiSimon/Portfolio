@@ -78,6 +78,12 @@ function spawnCarteMain(num, val, combientieme) {
     laCarte.children[2].classList.add("icon-entre");
     laCarte.children[2].classList.add(num + "num");
 
+    if (num === "J" || num === "Q" || num === "K") {
+        laCarte.children[2].appendChild(document.createElement("img"));
+        laCarte.children[2].children[0].src = "../img/" + num + " " + val + ".png";
+        laCarte.children[2].children[0].classList.add("image-icon-entre");
+    }
+
     laCarte.appendChild(document.createElement("img"));
     laCarte.children[3].src = "../img/" + val +".png";
 
