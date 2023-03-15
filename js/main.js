@@ -209,3 +209,143 @@ function iconCentre(n, val) {
         }
     }
 }
+
+function organiser() {
+    let nbcartes = document.getElementsByClassName("carteFace").length;
+    if (nbcartes === 2) {
+        document.getElementsByClassName("carteFace")[0].style.left = "39%";
+        document.getElementsByClassName("carteFace")[0].style.rotate = "-5deg"; 
+        document.getElementsByClassName("carteFace")[1].style.left = "47%";
+        document.getElementsByClassName("carteFace")[1].style.rotate = "5deg";
+    }
+    if (nbcartes === 3) {
+        document.getElementsByClassName("carteFace")[0].style.left = "35%";
+        document.getElementsByClassName("carteFace")[0].style.rotate = "-7deg";
+        document.getElementsByClassName("carteFace")[1].style.bottom = "-15%";        
+        document.getElementsByClassName("carteFace")[2].style.left = "51%";
+        document.getElementsByClassName("carteFace")[2].style.rotate = "7deg";
+    }
+    if (nbcartes === 4) {
+        document.getElementsByClassName("carteFace")[0].style.left = "31%";
+        document.getElementsByClassName("carteFace")[0].style.rotate = "-10deg";
+        document.getElementsByClassName("carteFace")[1].style.left = "39%";
+        document.getElementsByClassName("carteFace")[1].style.rotate = "-5deg";
+        document.getElementsByClassName("carteFace")[1].style.bottom = "-13%";        
+        document.getElementsByClassName("carteFace")[2].style.left = "47%";
+        document.getElementsByClassName("carteFace")[2].style.rotate = "5deg";
+        document.getElementsByClassName("carteFace")[2].style.bottom = "-13%";        
+        document.getElementsByClassName("carteFace")[3].style.left = "55%";
+        document.getElementsByClassName("carteFace")[3].style.rotate = "10deg";
+    }
+    if (nbcartes === 5) {
+        document.getElementsByClassName("carteFace")[0].style.left = "27%";
+        document.getElementsByClassName("carteFace")[0].style.rotate = "-13deg";
+        document.getElementsByClassName("carteFace")[1].style.left = "35%";
+        document.getElementsByClassName("carteFace")[1].style.rotate = "-7deg";
+        document.getElementsByClassName("carteFace")[1].style.bottom = "-13%";
+        document.getElementsByClassName("carteFace")[2].style.bottom = "-11%";        
+        document.getElementsByClassName("carteFace")[3].style.left = "51%";
+        document.getElementsByClassName("carteFace")[3].style.rotate = "7deg";
+        document.getElementsByClassName("carteFace")[3].style.bottom = "-13%";        
+        document.getElementsByClassName("carteFace")[4].style.left = "59%";
+        document.getElementsByClassName("carteFace")[4].style.rotate = "13deg";
+    }
+    if (nbcartes === 6) {
+        document.getElementsByClassName("carteFace")[0].style.left = "23%";
+        document.getElementsByClassName("carteFace")[0].style.rotate = "-16deg";
+        document.getElementsByClassName("carteFace")[1].style.left = "31%";
+        document.getElementsByClassName("carteFace")[1].style.rotate = "-10deg";
+        document.getElementsByClassName("carteFace")[1].style.bottom = "-11%";
+        document.getElementsByClassName("carteFace")[2].style.left = "39%";
+        document.getElementsByClassName("carteFace")[2].style.rotate = "-5deg";
+        document.getElementsByClassName("carteFace")[2].style.bottom = "-9%";
+        document.getElementsByClassName("carteFace")[3].style.left = "47%";
+        document.getElementsByClassName("carteFace")[3].style.rotate = "5deg";
+        document.getElementsByClassName("carteFace")[3].style.bottom = "-9%";
+        document.getElementsByClassName("carteFace")[4].style.left = "55%";
+        document.getElementsByClassName("carteFace")[4].style.rotate = "10deg";
+        document.getElementsByClassName("carteFace")[4].style.bottom = "-11%";
+        document.getElementsByClassName("carteFace")[5].style.left = "63%";
+        document.getElementsByClassName("carteFace")[5].style.rotate = "16deg";
+    }
+    if (nbcartes === 7) {
+        document.getElementsByClassName("carteFace")[0].style.left = "19%";
+        document.getElementsByClassName("carteFace")[0].style.rotate = "-19deg";
+        document.getElementsByClassName("carteFace")[0].style.bottom = "-20%";
+        document.getElementsByClassName("carteFace")[1].style.left = "27%";
+        document.getElementsByClassName("carteFace")[1].style.rotate = "-13deg";
+        document.getElementsByClassName("carteFace")[1].style.bottom = "-12%";
+        document.getElementsByClassName("carteFace")[2].style.left = "35%";
+        document.getElementsByClassName("carteFace")[2].style.rotate = "-7deg";
+        document.getElementsByClassName("carteFace")[2].style.bottom = "-7%";
+        document.getElementsByClassName("carteFace")[3].style.bottom = "-5%";
+        document.getElementsByClassName("carteFace")[4].style.left = "51%";
+        document.getElementsByClassName("carteFace")[4].style.rotate = "7deg";
+        document.getElementsByClassName("carteFace")[4].style.bottom = "-7%";
+        document.getElementsByClassName("carteFace")[5].style.left = "59%";
+        document.getElementsByClassName("carteFace")[5].style.rotate = "13deg";
+        document.getElementsByClassName("carteFace")[5].style.bottom = "-12%";
+        document.getElementsByClassName("carteFace")[6].style.left = "67%";
+        document.getElementsByClassName("carteFace")[6].style.rotate = "19deg";
+        document.getElementsByClassName("carteFace")[6].style.bottom = "-20%";
+    }
+    if (nbcartes === 8) {
+        document.getElementsByClassName("carteFace")[0].style.left = "15%";
+        document.getElementsByClassName("carteFace")[0].style.rotate = "-22deg";
+        document.getElementsByClassName("carteFace")[0].style.bottom = "-20%";
+        document.getElementsByClassName("carteFace")[1].style.left = "23%";
+        document.getElementsByClassName("carteFace")[1].style.rotate = "-16deg";
+        document.getElementsByClassName("carteFace")[1].style.bottom = "-12%";
+        document.getElementsByClassName("carteFace")[2].style.left = "31%";
+        document.getElementsByClassName("carteFace")[2].style.rotate = "-10deg";
+        document.getElementsByClassName("carteFace")[2].style.bottom = "-7%";
+        document.getElementsByClassName("carteFace")[3].style.left = "39%";
+        document.getElementsByClassName("carteFace")[3].style.rotate = "-5deg";
+        document.getElementsByClassName("carteFace")[3].style.bottom = "-5%";
+        document.getElementsByClassName("carteFace")[4].style.left = "47%";
+        document.getElementsByClassName("carteFace")[4].style.rotate = "5deg";
+        document.getElementsByClassName("carteFace")[4].style.bottom = "-5%";
+        document.getElementsByClassName("carteFace")[5].style.left = "55%";
+        document.getElementsByClassName("carteFace")[5].style.rotate = "10deg";
+        document.getElementsByClassName("carteFace")[5].style.bottom = "-7%";
+        document.getElementsByClassName("carteFace")[6].style.left = "63%";
+        document.getElementsByClassName("carteFace")[6].style.rotate = "16deg";
+        document.getElementsByClassName("carteFace")[6].style.bottom = "-12%";
+        document.getElementsByClassName("carteFace")[7].style.left = "71%";
+        document.getElementsByClassName("carteFace")[7].style.rotate = "22deg";
+        document.getElementsByClassName("carteFace")[7].style.bottom = "-20%";
+    }
+    if (nbcartes === 9) {
+        document.getElementsByClassName("carteFace")[0].style.left = "11%";
+        document.getElementsByClassName("carteFace")[0].style.rotate = "-25deg";
+        document.getElementsByClassName("carteFace")[0].style.bottom = "-20%";
+        document.getElementsByClassName("carteFace")[1].style.left = "19%";
+        document.getElementsByClassName("carteFace")[1].style.rotate = "-19deg";
+        document.getElementsByClassName("carteFace")[1].style.bottom = "-12%";
+        document.getElementsByClassName("carteFace")[2].style.left = "27%";
+        document.getElementsByClassName("carteFace")[2].style.rotate = "-13deg";
+        document.getElementsByClassName("carteFace")[2].style.bottom = "-7%";
+        document.getElementsByClassName("carteFace")[3].style.left = "35%";
+        document.getElementsByClassName("carteFace")[3].style.rotate = "-7deg";
+        document.getElementsByClassName("carteFace")[3].style.bottom = "-5%";
+        document.getElementsByClassName("carteFace")[4].style.left = "43%";
+        document.getElementsByClassName("carteFace")[4].style.bottom = "-5%";
+        document.getElementsByClassName("carteFace")[5].style.left = "51%";
+        document.getElementsByClassName("carteFace")[5].style.rotate = "7deg";
+        document.getElementsByClassName("carteFace")[5].style.bottom = "-5%";
+        document.getElementsByClassName("carteFace")[6].style.left = "59%";
+        document.getElementsByClassName("carteFace")[6].style.rotate = "13deg";
+        document.getElementsByClassName("carteFace")[6].style.bottom = "-7%";
+        document.getElementsByClassName("carteFace")[7].style.left = "67%";
+        document.getElementsByClassName("carteFace")[7].style.rotate = "19deg";
+        document.getElementsByClassName("carteFace")[7].style.bottom = "-12%";
+        document.getElementsByClassName("carteFace")[8].style.left = "75%";
+        document.getElementsByClassName("carteFace")[8].style.rotate = "25deg";
+        document.getElementsByClassName("carteFace")[8].style.bottom = "-20%";
+    }
+    for (let i = 0; i < nbcartes-1; i++) {
+        let random = Math.floor(Math.random() * 100);
+        document.getElementsByClassName("carteFace")[i].style.animation = "carteOrganise 0.2s " + random + "ms";
+    }
+    document.getElementsByClassName("carteFace")[nbcartes-1].style.animation = "carteMain 0.4s";
+}

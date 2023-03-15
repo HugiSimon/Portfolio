@@ -72,7 +72,7 @@ body{
     box-shadow: 5px 7px 23px -1px rgba(0,0,0,0.64);
     font-family: "CreateRound-Regular.ttf", sans-serif;
     color: black;
-    bottom: 5%; /* -17% */
+    bottom: -17%; /* -17% */
     left: 43.3%;
 }
 
@@ -174,4 +174,22 @@ body{
     100%{
         transform: translateY(300%);
     }
+}
+
+@keyframes carteOrganise{
+    0%{
+        transform: translateY(-20%);
+    }
+    50%{
+        transform: translateY(10%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes carteMain{
+    0%{transform: translateY(100%);}
+    80%{transform: translateY(-20%);}
+    100%{transform: translateY(0%);}
 }
