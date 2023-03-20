@@ -82,6 +82,7 @@ body{
     margin-top: -3px;
     margin-left: 8px;
     font-size: 12mm;
+    letter-spacing: -5px;
 }
 
 .carteFace .num-cards-upside{
@@ -197,5 +198,23 @@ body{
 @keyframes carteMain{
     0%{transform: translateY(100%);}
     80%{transform: translateY(-20%);}
+    100%{transform: translateY(0%);}
+}
+
+@keyframes carteOrganiseCroupier{
+    0%{
+        transform: translateY(20%);
+    }
+    50%{
+        transform: translateY(-10%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes carteMainCroupier{
+    0%{transform: translateY(-100%);}
+    80%{transform: translateY(20%);}
     100%{transform: translateY(0%);}
 }

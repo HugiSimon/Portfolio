@@ -112,6 +112,7 @@ function blackjack(cards) {
 async function startGame() {
     if (!allReady) {
         cleanBoard();
+        cleanBoardCroupier();
         allReady = true;
         attent = true;
         if (packet.length < 10) {
@@ -120,10 +121,14 @@ async function startGame() {
         playerCards = distributeCards(packet, 1);
         createCarte();  
         croupierCards = distributeCards(packet, 1);
+        spawnCarteCroupier(croupierCards[0].valeur, croupierCards[0].couleur, true);
+        organiserCroupier();
         await sleep(500);
         playerCards.push(distributeCards(packet, 1)[0]);
         createCarte();
         croupierCards.push(distributeCards(packet, 1)[0]);
+        spawnCarteCroupier(croupierCards[1].valeur, croupierCards[1].couleur, false);
+        organiserCroupier();
         await sleep(1000);
         recupCarte();
         await sleep(1000);
@@ -136,13 +141,19 @@ async function startGame() {
         afficheCards(croupierCards, "cache");
 
         if (blackjack(playerCards) && blackjack(croupierCards)) {
-            console.log("Égalité !")
+            returnCarte();
+            organiserCroupier();
+            finish("égalité");
             allReady = false;
         } else if (blackjack(playerCards)) {
-            console.log("Blackjack ! Vous avez gagné !")
+            returnCarte();
+            organiserCroupier();
+            finish("gagné");
             allReady = false;
         } else if (blackjack(croupierCards)) {
-            console.log("Blackjack ! Le croupier a gagné !")
+            returnCarte();
+            organiserCroupier();
+            finish("perdu");
             allReady = false;
         }
     } else {
@@ -158,10 +169,9 @@ async function hit() {
         createCarte();
         afficheCards(playerCards, "joueur");
         if (bust(playerCards)) {
-            console.log("Vous avez perdu !")
+            finish("perdu");
             allReady = false;
         } else if (blackjack(playerCards)) {
-            console.log("Blackjack !")
             stand();
         }
         await sleep(1000);
@@ -173,21 +183,27 @@ async function hit() {
     }
 }
 
-function stand() {
+async function stand() {
     if (allReady) {
+        returnCarte();
+        organiserCroupier();
+        await sleep(1000);
         while (getCardValue(croupierCards) < 17) {
             croupierCards.push(distributeCards(packet, 1)[0]);
+            spawnCarteCroupier(croupierCards[croupierCards.length - 1].valeur, croupierCards[croupierCards.length - 1].couleur, false);
+            organiserCroupier();
+            await sleep(1000);
         }
         if (bust(croupierCards)) {
-            console.log("Le croupier a perdu !")
+            finish("gagné");
         } else if (blackjack(croupierCards) && blackjack(playerCards) === false) {
-            console.log("Blackjack ! Le croupier a gagné !")
+            finish("perdu");
         } else if (getCardValue(playerCards) > getCardValue(croupierCards)) {
-            console.log("Vous avez gagné !")
+            finish("gagné");
         } else if (getCardValue(playerCards) < getCardValue(croupierCards)) {
-            console.log("Vous avez perdu !")
+            finish("perdu");
         } else {
-            console.log("Egalité !")
+            finish("égalité");
         }
         afficheCards(playerCards, "joueur");
         afficheCards(croupierCards, "croupier");
@@ -196,10 +212,13 @@ function stand() {
 }
 
 function double() {
-    if (allReady) {
-        hit();
+    if (attent) return;
+    if (playerCards.length === 2) {
         if (allReady) {
-            stand();
+            hit();
+            if (allReady) {
+                stand();
+            }
         }
     }
 }
@@ -226,4 +245,8 @@ function afficheCards(cards, etat) {
         text += cards[0].valeur + " de " + cards[0].couleur + " et une carte cachée, avec un score de " + getCardValue([cards[0]]) + " points.";
     }
     console.log(text);
+}
+
+function finish(win) {
+    console.log("Résultat : " + win);
 }

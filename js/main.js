@@ -71,6 +71,13 @@ function spawnCarteMain(num, val, combientieme) {
     laCarte.appendChild(document.createElement("p"));
     laCarte.children[0].innerHTML = num;
 
+    if (num === "Q") {
+        laCarte.children[0].style.marginLeft = "2px";
+    }
+    if (num === 10) {
+        laCarte.children[0].style.marginLeft = "-3px";
+    }
+
     laCarte.appendChild(document.createElement("img"));
     laCarte.children[1].src = "../img/" + val +".png";
 
@@ -377,5 +384,153 @@ function cleanBoard(){
     }
     while (carteFace[0]) {
         carteFace[0].parentNode.removeChild(carteFace[0]);
+    }
+}
+
+function spawnCarteCroupier(num, val, hide) {
+    let carte = document.createElement("div");
+    carte.classList.add("carteCroupier");
+
+    if (hide) {
+        carte.appendChild(document.createElement("img"));
+        carte.lastChild.src = "../img/card-back.png";
+        carte.lastChild.classList.add("carte");
+    }else{
+        carte.appendChild(document.createElement("p"));
+        carte.lastChild.innerHTML = num;
+
+        carte.appendChild(document.createElement("img"));
+        carte.lastChild.src = "../img/" + val + ".png";
+        carte.lastChild.classList.add("petit");
+
+        if (val === "spades" || val === "clubs") {
+            carte.children[0].style.color = "black";
+        }
+
+        if (num === "10") {
+            carte.children[0].style.marginLeft = "-2px"
+        }
+    }
+
+    document.body.appendChild(carte);
+}
+
+function cleanBoardCroupier(){
+    let carteCroupier = document.getElementsByClassName("carteCroupier");
+    while (carteCroupier[0]) {
+        carteCroupier[0].parentNode.removeChild(carteCroupier[0]);
+    }
+}
+
+function returnCarte() {
+    let carte = document.getElementsByClassName("carteCroupier");
+    let nbCarte = carte.length;
+    for (let i = 0; i < nbCarte; i++) {
+        if (carte[i].children.length === 1) {
+            console.log(croupierCards[i]);
+            spawnCarteCroupier(croupierCards[i].valeur, croupierCards[i].couleur, false);
+            carte[i].parentNode.removeChild(carte[i]);
+        }
+    }
+}
+
+async function organiserCroupier() {
+    let nbCarteCroupier = document.getElementsByClassName("carteCroupier").length;
+
+    if (nbCarteCroupier === 1) {
+        document.getElementsByClassName("carteCroupier")[0].style.left = "47.4%";
+        document.getElementsByClassName("carteCroupier")[0].style.rotate = "180deg";
+    }
+    if (nbCarteCroupier === 2) {
+        document.getElementsByClassName("carteCroupier")[0].style.left = "49%";
+        document.getElementsByClassName("carteCroupier")[0].style.rotate = "-185deg";
+        document.getElementsByClassName("carteCroupier")[1].style.left = "45%";
+        document.getElementsByClassName("carteCroupier")[1].style.rotate = "185deg";
+    }
+    if (nbCarteCroupier === 3) {
+        document.getElementsByClassName("carteCroupier")[0].style.left = "51%";
+        document.getElementsByClassName("carteCroupier")[0].style.rotate = "-185deg";
+        document.getElementsByClassName("carteCroupier")[1].style.left = "47%";
+        document.getElementsByClassName("carteCroupier")[1].style.rotate = "180deg";
+        document.getElementsByClassName("carteCroupier")[1].style.top = "-1%";
+        document.getElementsByClassName("carteCroupier")[2].style.left = "43%";
+        document.getElementsByClassName("carteCroupier")[2].style.rotate = "185deg";
+    }
+    if (nbCarteCroupier === 4) {
+        document.getElementsByClassName("carteCroupier")[0].style.left = "53%";
+        document.getElementsByClassName("carteCroupier")[0].style.rotate = "-187.5deg";
+        document.getElementsByClassName("carteCroupier")[1].style.left = "49%";
+        document.getElementsByClassName("carteCroupier")[1].style.rotate = "-182.5deg";
+        document.getElementsByClassName("carteCroupier")[1].style.top = "-1%";
+        document.getElementsByClassName("carteCroupier")[2].style.left = "45%";
+        document.getElementsByClassName("carteCroupier")[2].style.rotate = "182.5deg";
+        document.getElementsByClassName("carteCroupier")[2].style.top = "-1%";
+        document.getElementsByClassName("carteCroupier")[3].style.left = "41%";
+        document.getElementsByClassName("carteCroupier")[3].style.rotate = "187.5deg";
+    }
+    if (nbCarteCroupier === 5) {
+        document.getElementsByClassName("carteCroupier")[0].style.left = "55%";
+        document.getElementsByClassName("carteCroupier")[0].style.rotate = "-190deg";
+        document.getElementsByClassName("carteCroupier")[0].style.top = "-4%";
+        document.getElementsByClassName("carteCroupier")[1].style.left = "51%";
+        document.getElementsByClassName("carteCroupier")[1].style.rotate = "-185deg";
+        document.getElementsByClassName("carteCroupier")[2].style.left = "47%";
+        document.getElementsByClassName("carteCroupier")[2].style.rotate = "180deg";
+        document.getElementsByClassName("carteCroupier")[2].style.top = "-1%";
+        document.getElementsByClassName("carteCroupier")[3].style.left = "43%";
+        document.getElementsByClassName("carteCroupier")[3].style.rotate = "185deg";
+        document.getElementsByClassName("carteCroupier")[4].style.left = "39%";
+        document.getElementsByClassName("carteCroupier")[4].style.rotate = "190deg";
+        document.getElementsByClassName("carteCroupier")[4].style.top = "-4%";
+    }
+    if (nbCarteCroupier === 6) {
+        document.getElementsByClassName("carteCroupier")[0].style.left = "57%";
+        document.getElementsByClassName("carteCroupier")[0].style.rotate = "-192.5deg";
+        document.getElementsByClassName("carteCroupier")[0].style.top = "-5%";
+        document.getElementsByClassName("carteCroupier")[1].style.left = "53%";
+        document.getElementsByClassName("carteCroupier")[1].style.rotate = "-187.5deg";
+        document.getElementsByClassName("carteCroupier")[2].style.left = "49%";
+        document.getElementsByClassName("carteCroupier")[2].style.rotate = "-182.5deg";
+        document.getElementsByClassName("carteCroupier")[2].style.top = "-1%";
+        document.getElementsByClassName("carteCroupier")[3].style.left = "45%";
+        document.getElementsByClassName("carteCroupier")[3].style.rotate = "182.5deg";
+        document.getElementsByClassName("carteCroupier")[3].style.top = "-1%";
+        document.getElementsByClassName("carteCroupier")[4].style.left = "41%";
+        document.getElementsByClassName("carteCroupier")[4].style.rotate = "187.5deg";
+        document.getElementsByClassName("carteCroupier")[5].style.left = "37%";
+        document.getElementsByClassName("carteCroupier")[5].style.rotate = "192.5deg";
+        document.getElementsByClassName("carteCroupier")[5].style.top = "-5%";
+    }
+    if (nbCarteCroupier === 7) {
+        document.getElementsByClassName("carteCroupier")[0].style.left = "59%";
+        document.getElementsByClassName("carteCroupier")[0].style.rotate = "-195deg";
+        document.getElementsByClassName("carteCroupier")[0].style.top = "-8%";
+        document.getElementsByClassName("carteCroupier")[1].style.left = "55%";
+        document.getElementsByClassName("carteCroupier")[1].style.rotate = "-190deg";
+        document.getElementsByClassName("carteCroupier")[1].style.top = "-4%";
+        document.getElementsByClassName("carteCroupier")[2].style.left = "51%";
+        document.getElementsByClassName("carteCroupier")[2].style.rotate = "-185deg";
+        document.getElementsByClassName("carteCroupier")[3].style.left = "47%";
+        document.getElementsByClassName("carteCroupier")[3].style.rotate = "180deg";
+        document.getElementsByClassName("carteCroupier")[3].style.top = "-1%";
+        document.getElementsByClassName("carteCroupier")[4].style.left = "43%";
+        document.getElementsByClassName("carteCroupier")[4].style.rotate = "185deg";
+        document.getElementsByClassName("carteCroupier")[5].style.left = "39%";
+        document.getElementsByClassName("carteCroupier")[5].style.rotate = "190deg";
+        document.getElementsByClassName("carteCroupier")[5].style.top = "-4%";
+        document.getElementsByClassName("carteCroupier")[6].style.left = "35%";
+        document.getElementsByClassName("carteCroupier")[6].style.rotate = "195deg";
+        document.getElementsByClassName("carteCroupier")[6].style.top = "-8%";
+    }
+
+    for (let i = 0; i < nbCarteCroupier-1; i++) {
+        let random = Math.floor(Math.random() * 50);
+        document.getElementsByClassName("carteCroupier")[i].style.animation = "carteOrganiseCroupier 0.2s " + random + "ms";
+    }
+    document.getElementsByClassName("carteCroupier")[nbCarteCroupier-1].style.animation = "carteMainCroupier 0.4s";
+
+    await sleep(400);
+    for (let i = 0; i < nbCarteCroupier; i++) {
+        document.getElementsByClassName("carteCroupier")[i].style.animation = "none";
     }
 }
