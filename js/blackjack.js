@@ -111,6 +111,7 @@ function blackjack(cards) {
 // Fonctions jeu
 async function startGame() {
     if (!allReady) {
+        scoreReset();
         cleanBoard();
         cleanBoardCroupier();
         allReady = true;
@@ -129,30 +130,35 @@ async function startGame() {
         croupierCards.push(distributeCards(packet, 1)[0]);
         spawnCarteCroupier(croupierCards[1].valeur, croupierCards[1].couleur, false);
         organiserCroupier();
+        score(true, false);
         await sleep(1000);
         recupCarte();
         await sleep(1000);
         spawnCarteMain(playerCards[0].valeur, playerCards[0].couleur, 0);
         spawnCarteMain(playerCards[1].valeur, playerCards[1].couleur, 1);
         organiser();
+        score(true, true);
         attent = false;
 
-        afficheCards(playerCards, "joueur");
-        afficheCards(croupierCards, "cache");
+        //afficheCards(playerCards, "joueur");
+        //afficheCards(croupierCards, "cache");
 
         if (blackjack(playerCards) && blackjack(croupierCards)) {
             returnCarte();
             organiserCroupier();
+            score(false, true);
             finish("égalité");
             allReady = false;
         } else if (blackjack(playerCards)) {
             returnCarte();
             organiserCroupier();
+            score(false, true);
             finish("gagné");
             allReady = false;
         } else if (blackjack(croupierCards)) {
             returnCarte();
             organiserCroupier();
+            score(false, true);
             finish("perdu");
             allReady = false;
         }
@@ -167,31 +173,38 @@ async function hit() {
         attent = true;
         playerCards.push(distributeCards(packet, 1)[0]);
         createCarte();
-        afficheCards(playerCards, "joueur");
-        if (bust(playerCards)) {
-            finish("perdu");
-            allReady = false;
-        } else if (blackjack(playerCards)) {
-            stand();
-        }
         await sleep(1000);
         recupCarte();
         await sleep(1000);
         spawnCarteMain(playerCards[playerCards.length - 1].valeur, playerCards[playerCards.length - 1].couleur, playerCards.length - 1);
         organiser();
+        score(true, true);
+        //afficheCards(playerCards, "joueur");
+        if (bust(playerCards)) {
+            returnCarte();
+            organiserCroupier();
+            score(false, true);
+            finish("perdu");
+            allReady = false;
+        } else if (blackjack(playerCards)) {
+            stand();
+        }
         attent = false;
     }
 }
 
 async function stand() {
+    if (attent) return;
     if (allReady) {
         returnCarte();
         organiserCroupier();
+        score(false, true);
         await sleep(1000);
         while (getCardValue(croupierCards) < 17) {
             croupierCards.push(distributeCards(packet, 1)[0]);
             spawnCarteCroupier(croupierCards[croupierCards.length - 1].valeur, croupierCards[croupierCards.length - 1].couleur, false);
             organiserCroupier();
+            score(false, true);
             await sleep(1000);
         }
         if (bust(croupierCards)) {
@@ -205,20 +218,19 @@ async function stand() {
         } else {
             finish("égalité");
         }
-        afficheCards(playerCards, "joueur");
-        afficheCards(croupierCards, "croupier");
+        //afficheCards(playerCards, "joueur");
+        //afficheCards(croupierCards, "croupier");
         allReady = false;
     }
 }
 
-function double() {
+async function double() {
     if (attent) return;
     if (playerCards.length === 2) {
         if (allReady) {
             hit();
-            if (allReady) {
-                stand();
-            }
+            await sleep(2500);
+            stand();
         }
     }
 }
@@ -242,7 +254,7 @@ function afficheCards(cards, etat) {
     }
     if (etat === "cache") {
         text = "Le croupier a : "
-        text += cards[0].valeur + " de " + cards[0].couleur + " et une carte cachée, avec un score de " + getCardValue([cards[0]]) + " points.";
+        text += cards[1].valeur + " de " + cards[1].couleur + " et une carte cachée, avec un score de " + getCardValue([cards[1]]) + " points.";
     }
     console.log(text);
 }

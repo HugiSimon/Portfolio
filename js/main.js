@@ -74,7 +74,7 @@ function spawnCarteMain(num, val, combientieme) {
     if (num === "Q") {
         laCarte.children[0].style.marginLeft = "2px";
     }
-    if (num === 10) {
+    if (num === "10") {
         laCarte.children[0].style.marginLeft = "-3px";
     }
 
@@ -427,7 +427,6 @@ function returnCarte() {
     let nbCarte = carte.length;
     for (let i = 0; i < nbCarte; i++) {
         if (carte[i].children.length === 1) {
-            console.log(croupierCards[i]);
             spawnCarteCroupier(croupierCards[i].valeur, croupierCards[i].couleur, false);
             carte[i].parentNode.removeChild(carte[i]);
         }
@@ -474,6 +473,7 @@ async function organiserCroupier() {
         document.getElementsByClassName("carteCroupier")[0].style.top = "-4%";
         document.getElementsByClassName("carteCroupier")[1].style.left = "51%";
         document.getElementsByClassName("carteCroupier")[1].style.rotate = "-185deg";
+        document.getElementsByClassName("carteCroupier")[1].style.top = "-2%";
         document.getElementsByClassName("carteCroupier")[2].style.left = "47%";
         document.getElementsByClassName("carteCroupier")[2].style.rotate = "180deg";
         document.getElementsByClassName("carteCroupier")[2].style.top = "-1%";
@@ -533,4 +533,20 @@ async function organiserCroupier() {
     for (let i = 0; i < nbCarteCroupier; i++) {
         document.getElementsByClassName("carteCroupier")[i].style.animation = "none";
     }
+}
+
+function score(hide, main) {
+    if (hide) {
+        document.getElementById("scoreCroupier").innerHTML = getCardValue([croupierCards[1]]);
+    } else {
+        document.getElementById("scoreCroupier").innerHTML = getCardValue(croupierCards);
+    }
+    if (main) {
+        document.getElementById("scorePlayer").innerHTML = getCardValue(playerCards);
+    }
+}
+
+function scoreReset() {
+    document.getElementById("scoreCroupier").innerHTML = "0";
+    document.getElementById("scorePlayer").innerHTML = "0";
 }
