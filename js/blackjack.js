@@ -44,7 +44,13 @@ let projet = [["Ropin' Thieves", "Ropin' Thieves est un jeu plateforme 2D où le
               ["Emotions Driven", "Emotions Driven est un jeu de plateforme 2D avec différent type de gameplay qui accompagnent les émotions du joueur", "2022", "TODO", "https://hugosimon.itch.io/emotion-driven"],
               ["Casino Sourcils", "Casino Sourcils est une démonstration pour faire comuniquer Construct et la page web, et faire un système qui peut rendre accro", "2022", "TODO", "https://hugisimon.github.io/Casino_Sourcils/"],
               ["Rolquor", "[EN COURS] Rolquor est un logiciel destiné aux streamers pour jouer à des jeux de rôles en lignes tout en rendant le jeu assez joli pour les spectateurs", "2023", "TODO", "https://github.com/HugiSimon/Rolquor"]];
-lesProjets = [];
+let lesProjets = [];
+
+let social = [["email.png", "mailto:cece057.ytb@gmail.com", "Mail"], 
+                ["github.png", "https://github.com/HugiSimon", "Github"], 
+                ["twitter.png", "https://twitter.com/CCe057", "Twitter"], 
+                ["instagram.png", "https://www.instagram.com/hugo.simon.68", "Instagram"],
+                ["linkedin.png", "#", "Linkedin"]]
 
 // Fonctions pack de cartes
 function createPack() {

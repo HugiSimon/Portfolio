@@ -68,7 +68,6 @@ function carteDosProjet() {
 
 function jeuCarteProjet(id, projet) {
     let carte = document.getElementById(id);
-    console.log(carte, id, projet);
     carte.appendChild(document.createElement("p"));
     carte.lastChild.innerHTML = projet[0];
     carte.lastChild.classList.add("nomProjet");
@@ -160,7 +159,6 @@ function circulise() {
 
         document.getElementById("leTitre").appendChild(texteArrayHTML[i]);
     }
-    console.log(texteArray);
 }
 
 function createCarte() {
@@ -533,6 +531,8 @@ function cleanBoard(){
     }
 }
 
+let dejaSocial = [];
+
 function spawnCarteCroupier(num, val, hide) {
     let carte = document.createElement("div");
     carte.classList.add("carteCroupier");
@@ -541,6 +541,7 @@ function spawnCarteCroupier(num, val, hide) {
         carte.appendChild(document.createElement("img"));
         carte.lastChild.src = "../img/card-back.png";
         carte.lastChild.classList.add("carte");
+        dejaSocial = [];
     }else{
         carte.appendChild(document.createElement("p"));
         carte.lastChild.innerHTML = num;
@@ -548,6 +549,21 @@ function spawnCarteCroupier(num, val, hide) {
         carte.appendChild(document.createElement("img"));
         carte.lastChild.src = "../img/" + val + ".png";
         carte.lastChild.classList.add("petit");
+
+        if (dejaSocial.length !== 5) {
+            do {
+                var numSocial = Math.floor(Math.random() * 5);
+            } while (dejaSocial.includes(numSocial));
+            dejaSocial.push(numSocial);
+            carte.appendChild(document.createElement("a"));
+            carte.lastChild.appendChild(document.createElement("img"));
+            carte.lastChild.lastChild.src = "../img/" + social[numSocial][0];
+            carte.lastChild.lastChild.alt = social[numSocial][2];
+            carte.lastChild.lastChild.classList.add("reseau");
+            carte.lastChild.href = social[numSocial][1];
+            carte.lastChild.target = "_blank";
+        }
+
 
         if (val === "spades" || val === "clubs") {
             carte.children[0].style.color = "black";

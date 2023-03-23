@@ -192,7 +192,7 @@ body{
 
 .lesCartesDos{
     margin: 0px 200px 0px 200px;
-    padding-top: 100px;
+    padding-top: 450px;
     position: relative;
 }
 
@@ -368,13 +368,13 @@ body{
     position: absolute;
 }
 
-.carteCroupier .reseau{
-    width: 20mm;
+.carteCroupier a .reseau{
+    width: 15mm;
     height: auto;
-    top: 35%;
-    left: 17%;
+    top: 39%;
+    left: 26%;
     position: absolute;
-    rotate: 180deg;
+    rotate: 0deg;
 }
 
 @keyframes fermeCote{
