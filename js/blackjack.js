@@ -38,11 +38,13 @@ let packet = []; // Tableau contenant les cartes du paquet
 let allReady = false; // Booléen indiquant si le jeu est déjà distribué
 let attent = false; // Booléen indiquant si le joueur est en attente de la fin de l'animation
 let etat = "en attente"; // Etat de la partie (en cours, gagné, perdu, égalité, en attente)
+let premierTour = true; // Booléen indiquant si c'est le premier tour du joueur
 
 let projet = [["Ropin' Thieves", "Ropin' Thieves est un jeu plateforme 2D où le but en duo est de passer toutes les salles qui regorgent de pièges et d'énigmes en s'aidant d'un grapin pour se déplacer", "2022", "TODO", "https://gaetan-piou.itch.io/ropin-thieves"],
               ["Emotions Driven", "Emotions Driven est un jeu de plateforme 2D avec différent type de gameplay qui accompagnent les émotions du joueur", "2022", "TODO", "https://hugosimon.itch.io/emotion-driven"],
               ["Casino Sourcils", "Casino Sourcils est une démonstration pour faire comuniquer Construct et la page web, et faire un système qui peut rendre accro", "2022", "TODO", "https://hugisimon.github.io/Casino_Sourcils/"],
               ["Rolquor", "[EN COURS] Rolquor est un logiciel destiné aux streamers pour jouer à des jeux de rôles en lignes tout en rendant le jeu assez joli pour les spectateurs", "2023", "TODO", "https://github.com/HugiSimon/Rolquor"]];
+lesProjets = [];
 
 // Fonctions pack de cartes
 function createPack() {
@@ -119,6 +121,16 @@ async function startGame() {
         scoreReset();
         cleanBoard();
         cleanBoardCroupier();
+        if (premierTour) {
+            let lesProjets2 = projet;
+            let randomIndex;
+            while (lesProjets2.length > 0) {
+                randomIndex = Math.floor(Math.random() * lesProjets2.length);
+                lesProjets.push(lesProjets2[randomIndex]);
+                lesProjets2.splice(randomIndex, 1);
+            }
+        }
+        premierTour = false;
         allReady = true;
         attent = true;
         if (packet.length < 10) {
@@ -181,7 +193,7 @@ async function hit() {
         await sleep(1000);
         recupCarte();
         await sleep(1000);
-        spawnCarteMain(playerCards[playerCards.length - 1].valeur, playerCards[playerCards.length - 1].couleur, playerCards.length - 1);
+        spawnCarteMain(playerCards[playerCards.length - 1].valeur, playerCards[playerCards.length - 1].couleur, playerCards.length);
         organiser();
         score(true, true);
         //afficheCards(playerCards, "joueur");

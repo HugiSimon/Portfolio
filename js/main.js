@@ -32,7 +32,7 @@ function carteDosProjet() {
             carte.lastChild.src = "../img/" + card.couleur + ".png";
             carte.lastChild.classList.add("icon-cards");
             carte.style.marginTop = "60mm";
-            carte.id = "carte" + i;
+            carte.id = "carteProjet" + i;
             carte.appendChild(document.createElement("p"));
             carte.lastChild.innerHTML = projet[j][0];
             carte.lastChild.classList.add("nomProjet");
@@ -64,6 +64,31 @@ function carteDosProjet() {
         carte.style.left = i * 5.6666 + "%";
         carteDiv.appendChild(carte);
     }
+}
+
+function jeuCarteProjet(id, projet) {
+    let carte = document.getElementById(id);
+    console.log(carte, id, projet);
+    carte.appendChild(document.createElement("p"));
+    carte.lastChild.innerHTML = projet[0];
+    carte.lastChild.classList.add("nomProjet");
+    carte.appendChild(document.createElement("div"));
+    carte.lastChild.classList.add("separation");
+    carte.appendChild(document.createElement("p"));
+    let description = projet[1];
+    if (description.length > 90) {
+        description = description.substring(0, 90);
+        let lastSpace = description.lastIndexOf(" ");
+        description = description.substring(0, lastSpace) + "...";
+    }
+    description += " <a href='#listeProjet'>En savoir plus</a>";
+    carte.lastChild.innerHTML = description;
+    carte.lastChild.classList.add("descriptionProjet");
+    carte.appendChild(document.createElement("div"));
+    carte.lastChild.classList.add("separation");
+    carte.appendChild(document.createElement("img"));
+    carte.lastChild.src = "../img/" + projet[0] + ".png" ;
+    carte.lastChild.classList.add("imgProjet");
 }
 
 addEventListener("mousemove", function (e) {
@@ -158,6 +183,17 @@ async function recupCarte() {
 }
 
 function spawnCarteMain(num, val, combientieme) {
+    let uneCarteNormal = true;
+    if (lesProjets.length > 0) {
+        if (Math.floor(Math.random() * 2) === 0) {
+            uneCarteNormal = false;
+        }
+    } /*else {
+        if (Math.floor(Math.random() * 10) === 0) {
+            uneCarteNormal = false;
+        }
+    }*/
+
     let laCarte = document.createElement("div");
 
     laCarte.appendChild(document.createElement("p"));
@@ -173,44 +209,62 @@ function spawnCarteMain(num, val, combientieme) {
     laCarte.appendChild(document.createElement("img"));
     laCarte.children[1].src = "../img/" + val +".png";
 
-    laCarte.appendChild(document.createElement("div"));
-    laCarte.children[2].classList.add("icon-entre");
-    laCarte.children[2].classList.add(num + "num");
+    if (uneCarteNormal) {
+        laCarte.appendChild(document.createElement("div"));
+        laCarte.children[2].classList.add("icon-entre");
+        laCarte.children[2].classList.add(num + "num");
 
-    if (num === "J" || num === "Q" || num === "K") {
-        laCarte.children[2].appendChild(document.createElement("img"));
-        laCarte.children[2].children[0].src = "../img/" + num + " " + val + ".png";
-        laCarte.children[2].children[0].classList.add("image-icon-entre");
+        if (num === "J" || num === "Q" || num === "K") {
+            laCarte.children[2].appendChild(document.createElement("img"));
+            laCarte.children[2].children[0].src = "../img/" + num + " " + val + ".png";
+            laCarte.children[2].children[0].classList.add("image-icon-entre");
+        }
+
+        laCarte.appendChild(document.createElement("img"));
+        laCarte.children[3].src = "../img/" + val +".png";
+
+        laCarte.appendChild(document.createElement("p"));
+        laCarte.children[4].innerHTML = num;
     }
-
-    laCarte.appendChild(document.createElement("img"));
-    laCarte.children[3].src = "../img/" + val +".png";
-
-    laCarte.appendChild(document.createElement("p"));
-    laCarte.children[4].innerHTML = num;
 
     if(val === "heart" || val === "diamonds") {
         laCarte.children[0].style.color = "#dc2021";
-        laCarte.children[4].style.color = "#dc2021";
+        if (uneCarteNormal) {
+            laCarte.children[4].style.color = "#dc2021";
+        }
     }
 
     laCarte.children[0].classList.add("num-cards");
-    laCarte.children[4].classList.add("num-cards-upside");
     laCarte.children[1].classList.add("icon-cards");
-    laCarte.children[3].classList.add("icon-cards-upside");
+    if (uneCarteNormal) {
+        laCarte.children[3].classList.add("icon-cards-upside");
+        laCarte.children[4].classList.add("num-cards-upside");
+    }
 
     laCarte.classList.add("carteFace");
+    laCarte.id = "carte" + combientieme;
     document.body.appendChild(laCarte);
-    iconCentre(combientieme, val);
+    
+    if (uneCarteNormal) {
+        iconCentre(combientieme, val);
+    } else {
+        if (lesProjets.length > 0) {
+            jeuCarteProjet("carte" + combientieme, lesProjets.pop());
+        } else {
+            jeuCarteProjet("carte" + combientieme, projet[Math.floor(Math.random() * projet.length)]);
+        }
+    }
+    
 }
 
 function iconCentre(n, val) {
-    let num = parseInt(document.getElementsByClassName("icon-entre")[n].classList[1]);
+    //let num = parseInt(document.getElementsByClassName("icon-entre")[n].classList[1]);
+    let num = parseInt(document.getElementById("carte" + n).children[2].classList[1]);
     let icons = [];
     for (let i = 0; i < num; i++) {
         let icon = document.createElement("img");
         icon.src = "../img/" + val + ".png";
-        document.getElementsByClassName("icon-entre")[n].appendChild(icon);
+        document.getElementById("carte" + n).children[2].appendChild(icon);
         icons.push(icon);
     }
 

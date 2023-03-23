@@ -8,6 +8,10 @@
     src: url('../font/CreteRound-Regular.ttf');
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     background-color: #00382c;
     color: #cacaca;
