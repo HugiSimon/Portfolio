@@ -1,3 +1,84 @@
+function onLoad() {
+    rectangleCarte();
+    tailleJeu();
+    carteDosProjet();
+    fermerCote();
+}
+
+window.onresize = tailleJeu;
+
+function tailleJeu() {
+    document.getElementById("fond").style.height = window.innerHeight + "px";
+}
+
+function carteDosProjet() {
+    let carteDiv = document.getElementsByClassName("lesCartesDos")[0];
+    let pack = reFillPack();
+    let card;
+    let j = 0;
+    for (let i = 0; i < 15; i++) {
+        let carte = document.createElement("div");
+        if (i === 1 || i === 5 || i === 9 || i === 13) {
+            do {
+                card = pack.pop();
+            } while (card.valeur === "10" || card.valeur === "Q")
+            carte.appendChild(document.createElement("p"))
+            carte.lastChild.innerHTML = card.valeur;
+            carte.lastChild.classList.add("num-cards");
+            if (card.couleur === "heart" || card.couleur === "diamonds") {
+                carte.lastChild.style.color = "red";
+            }
+            carte.appendChild(document.createElement("img"))
+            carte.lastChild.src = "../img/" + card.couleur + ".png";
+            carte.lastChild.classList.add("icon-cards");
+            carte.style.marginTop = "60mm";
+            carte.id = "carte" + i;
+            carte.appendChild(document.createElement("p"));
+            carte.lastChild.innerHTML = projet[j][0];
+            carte.lastChild.classList.add("nomProjet");
+            carte.appendChild(document.createElement("div"));
+            carte.lastChild.classList.add("separation");
+            carte.appendChild(document.createElement("p"));
+            let description = projet[j][1];
+            if (description.length > 90) {
+                description = description.substring(0, 90);
+                let lastSpace = description.lastIndexOf(" ");
+                description = description.substring(0, lastSpace) + "...";
+            }
+            description += " <a href='" + projet[j][4] + "'>En savoir plus</a>";
+            carte.lastChild.innerHTML = description;
+            carte.lastChild.classList.add("descriptionProjet");
+            carte.appendChild(document.createElement("div"));
+            carte.lastChild.classList.add("separation");
+            carte.appendChild(document.createElement("img"));
+            carte.lastChild.src = "../img/" + projet[j][0] + ".png" ;
+            carte.lastChild.classList.add("imgProjet");
+            carte.classList.add("carteProjet");
+            j++;
+        } else {
+            carte.classList.add("dosProjet");
+            carte.appendChild(document.createElement("img"));
+            carte.lastChild.src = "../img/card-back.png";
+            carte.lastChild.classList.add("dosProjet");
+        }
+        carte.style.left = i * 5.6666 + "%";
+        carteDiv.appendChild(carte);
+    }
+}
+
+addEventListener("mousemove", function (e) {
+    if (e.target.classList[0] !== "carteProjet") {return}
+    if (e.target.style.animation === "hoverCarteProjet 1s forwards") {return}
+    e.target.style.animation = "hoverCarteProjet 1s forwards";
+    
+    let carte = document.getElementsByClassName("carteProjet");
+    for (let i = 0; i < carte.length; i++) {
+        if (carte[i] !== e.target && carte[i].style.animation === "1s ease 0s 1 normal forwards running hoverCarteProjet") {
+            carte[i].style.animation = "notHover 1s forwards";
+        }
+    }
+});
+
 function rectangleCarte() {
     let rectangle = document.getElementsByClassName("rectangle");
     let angle = 11;
@@ -16,6 +97,16 @@ function rectangleCarte() {
             rectangle[i].style.bottom = "7%";
         }
     }
+}
+
+function fermerCote() {
+    document.getElementById("jetons").style.animation = "fermeCote 1s cubic-bezier( .42, 0, .58, 1 ) forwards";
+    document.getElementById("jetonsFerme").style.animation = "btnFerme 1s forwards";
+}
+
+async function ouvrirCote() {
+    document.getElementById("jetons").style.animation = "ouvreCote 1s cubic-bezier( .42, 0, .58, 1 ) forwards";
+    document.getElementById("jetonsFerme").style.animation = "btnOuvre 1s forwards";
 }
 
 function circulise() {
@@ -51,6 +142,7 @@ function createCarte() {
     let carte = document.createElement("img");
     carte.src = "../img/card-back.png"
     carte.classList.add("carteDos");
+    carte.style.bottom = "5%";
 
     carte.style.rotate = Math.floor(Math.random() * 10 - 5) + "deg";
     

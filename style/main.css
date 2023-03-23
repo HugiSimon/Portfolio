@@ -9,14 +9,69 @@
 }
 
 body{
-    background-color: #004032;
-    color: #fff;
+    background-color: #00382c;
+    color: #cacaca;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+}
+
+#fond{
+    width: 100%;
+    height: 600px;
+    background-color: #004032;
+}
+
+#jetons{
+    position: absolute;
+    width: 20%;
+    height: 50%;
+    background-color: #ffffff;
+    z-index: 11;
+    border-radius: 10px;
+    right: 2%;
+    top: 25%;
+    box-shadow: -60px 1px 213px 6px rgba(0,0,0,0.75);
+}
+
+#fermerCote{
+    position: absolute;
+    height: 10%;
+    width: auto;
+    top: 45%;
+    left: -1%;
+}
+
+#jetonsFerme{
+    position: absolute;
+    height: 60px;
+    width: 30px;
+    top: 46.5%;
+    right: 1%;
+    background-color: white;
+    z-index: 10;
+    border-radius: 5px;
+    opacity: 0;
+}
+
+#jetonsFerme img{
+    top: 50%;
+    margin-top: -24px;
+    position: absolute;
+}
+
+#menuBoutton{
+    display: inline;
+    width: 100%;
+}
+
+.boutton{
+    flex: 20%;
+    text-align: center;
+    margin: 10px;
 }
 
 #titreNom, .cestCirculise{
@@ -41,13 +96,14 @@ body{
 
 #scoreDiv{
     position: absolute;
-    right: 0%;
+    right: 1%;
     top: 20%;
     background-color: #ffffffc9;
     width: 9%;
     border-radius: 10px;
     z-index: 2;
     box-shadow: 0px 2px 26px -2px rgba(0,0,0,0.65);
+    color: white;
 }
 
 #scoreDiv:after{
@@ -114,12 +170,104 @@ body{
     width: 60mm;
     position: absolute;
     left: 44.2%;
-    bottom: 5%;
     z-index: 1;
     border-radius: 5px;
     box-shadow: 12px 11px 24px -7px rgba(0,0,0,0.64);
 
     /*animation: carteDos 1s cubic-bezier(0.21, 0.83, 0.24, 1);*/
+}
+
+.dosProjet{
+    height: 95mm; /* ratio 1.53*/
+    width: 60mm;
+    position: absolute;
+    z-index: 1;
+    border-radius: 5px;
+    box-shadow: 12px 11px 24px -7px rgba(0,0,0,0.64);
+}
+
+.lesCartesDos{
+    margin: 0px 200px 0px 200px;
+    padding-top: 100px;
+    position: relative;
+}
+
+.lesCartesDos img{
+    position: absolute;
+    bottom: none;
+}
+
+.carteProjet{
+    height: 105mm;
+    width: 70mm;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 5px;
+    z-index: 1;
+    box-shadow: 5px 7px 23px -1px rgba(0,0,0,0.64);
+    font-family: "CreateRound-Regular.ttf", sans-serif;
+    color: black;
+}
+
+.carteProjet .num-cards{
+    margin: 0;
+    padding: 0;
+    margin-top: -3px;
+    margin-left: 8px;
+    font-size: 12mm;
+    letter-spacing: -5px;
+}
+
+.carteProjet .icon-cards{
+    width: 7mm;
+    height: auto;
+    margin-left: 7px;
+    margin-top: -12px;
+    position: absolute;
+}
+
+.nomProjet{
+    display: inline;
+    margin-left: 56px;
+    margin-top: 28px;
+    top: 0%;
+    position: absolute;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.descriptionProjet{
+    font-weight: bold;
+    padding: 10px;
+    text-align: justify;
+}
+
+.imgProjet{
+    width: 245px;
+    height: 185px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 10px;
+    margin-top: -10px;
+    box-shadow: 5px 5px 20px -2px rgba(0,0,0,0.75);
+}
+
+.separation{
+    border: #5050503b 1px solid;
+    border-radius: 100%;
+    position: absolute;
+}
+
+.nomProjet + .separation{
+    width: 60%;
+    margin-left: 70px;
+    margin-top: 9px;
+}
+
+.descriptionProjet + .separation{
+    width: 80%;
+    margin-left: 26px;
+    margin-top: -21px;
 }
 
 .carteFace{
@@ -225,6 +373,54 @@ body{
     rotate: 180deg;
 }
 
+@keyframes fermeCote{
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(140%);
+    }
+}
+
+@keyframes ouvreCote{
+    0%{
+        transform: translateX(140%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+
+@keyframes btnFerme{
+    0%{
+        opacity: 0;
+    }
+    20%{
+        opacity: 0;
+    }
+    80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes btnOuvre{
+    0%{
+        opacity: 1;
+    }
+    20%{
+        opacity: 1;
+    }
+    80%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
 @keyframes carteDos{
     0%{
         transform: translateY(-300%);
@@ -239,7 +435,7 @@ body{
         transform: translateY(0%);
     }
     100%{
-        transform: translateY(300%);
+        transform: translateY(250%);
     }
 }
 
@@ -277,4 +473,22 @@ body{
     0%{transform: translateY(-100%);}
     80%{transform: translateY(20%);}
     100%{transform: translateY(0%);}
+}
+
+@keyframes hoverCarteProjet{
+    0%{
+        transform: translateY(0%);
+    }
+    100%{
+        transform: translateY(40%);
+    }
+}
+
+@keyframes notHover{
+    0%{
+        transform: translateY(40%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
 }
