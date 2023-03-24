@@ -370,11 +370,27 @@ function iconCentre(n, val) {
 async function organiser() {
     let nbcartes = document.getElementsByClassName("carteFace").length;
 
+    if (nbcartes >= 5) {
+        document.getElementsByClassName("button-82-pushable")[0].style.position = "absolute";
+        document.getElementsByClassName("button-82-pushable")[0].style.left = "1%";
+        document.getElementsByClassName("button-82-pushable")[0].style.bottom = "60px";
+        document.getElementsByClassName("button-82-pushable")[1].style.position = "absolute";
+        document.getElementsByClassName("button-82-pushable")[1].style.left = "1%";
+        document.getElementsByClassName("button-82-pushable")[1].style.bottom = "0px";
+        document.getElementsByClassName("button-82-pushable")[2].style.position = "absolute";
+        document.getElementsByClassName("button-82-pushable")[2].style.right = "1%";
+        document.getElementsByClassName("button-82-pushable")[2].style.bottom = "60px";
+        document.getElementsByClassName("button-82-pushable")[3].style.position = "absolute";
+        document.getElementsByClassName("button-82-pushable")[3].style.right = "1%";
+        document.getElementsByClassName("button-82-pushable")[3].style.bottom = "0px";
+    }
+
     if (nbcartes === 2) {
         document.getElementsByClassName("carteFace")[0].style.left = "39%";
         document.getElementsByClassName("carteFace")[0].style.rotate = "-5deg"; 
         document.getElementsByClassName("carteFace")[1].style.left = "47%";
         document.getElementsByClassName("carteFace")[1].style.rotate = "5deg";
+        document.getElementsByClassName("separBtn")[0].style.width = "110mm";
     }
     if (nbcartes === 3) {
         document.getElementsByClassName("carteFace")[0].style.left = "35%";
@@ -384,6 +400,7 @@ async function organiser() {
         document.getElementsByClassName("carteFace")[1].style.bottom = "-15%";        
         document.getElementsByClassName("carteFace")[2].style.left = "51%";
         document.getElementsByClassName("carteFace")[2].style.rotate = "7deg";
+        document.getElementsByClassName("separBtn")[0].style.width = "150mm";
     }
     if (nbcartes === 4) {
         document.getElementsByClassName("carteFace")[0].style.left = "31%";
@@ -396,6 +413,7 @@ async function organiser() {
         document.getElementsByClassName("carteFace")[2].style.bottom = "-13%";        
         document.getElementsByClassName("carteFace")[3].style.left = "55%";
         document.getElementsByClassName("carteFace")[3].style.rotate = "10deg";
+        document.getElementsByClassName("separBtn")[0].style.width = "195mm";
     }
     if (nbcartes === 5) {
         document.getElementsByClassName("carteFace")[0].style.left = "27%";
@@ -411,6 +429,7 @@ async function organiser() {
         document.getElementsByClassName("carteFace")[3].style.bottom = "-13%";        
         document.getElementsByClassName("carteFace")[4].style.left = "59%";
         document.getElementsByClassName("carteFace")[4].style.rotate = "13deg";
+        document.getElementsByClassName("separBtn")[0].style.width = "235mm";
     }
     if (nbcartes === 6) {
         document.getElementsByClassName("carteFace")[0].style.left = "23%";
@@ -523,6 +542,10 @@ async function organiser() {
 function cleanBoard(){
     let carteDos = document.getElementsByClassName("carteDos");
     let carteFace = document.getElementsByClassName("carteFace");
+    document.getElementsByClassName("separBtn")[0].style.width = "0mm";
+    for (let i = 0; i < document.getElementsByClassName("button-82-pushable").length; i++) {
+        document.getElementsByClassName("button-82-pushable")[i].style = "none";
+    }
     while (carteDos[0]) {
         carteDos[0].parentNode.removeChild(carteDos[0]);    
     }

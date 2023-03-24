@@ -22,11 +22,6 @@
                 <img src="./img/arrow left.png" id="arrowLeft" alt="ouvrir">
             </div>
         </a>
-
-        <button onclick="startGame()">start</button>
-        <button onclick="hit()">hit</button>
-        <button onclick="stand()">stand</button>
-        <button onclick="double()">double</button>
     
         <div id="scoreDiv">
             <div id="content">
@@ -46,6 +41,42 @@
         <div class="rectangle"></div>
         <div class="rectangle"></div>
         <div class="rectangle"></div>
+
+        <div class="lesBtn">
+            <button class="button-82-pushable" role="button" onclick="startGame()">
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                Jouer
+                </span>
+            </button>
+        
+            <button class="button-82-pushable" role="button" onclick="hit()" disabled>
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                Hit
+                </span>
+            </button>
+
+            <div class="separBtn"></div>
+
+            <button class="button-82-pushable" role="button" onclick="stand()" disabled>
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                Stand
+                </span>
+            </button>
+        
+            <button class="button-82-pushable" role="button" onclick="double()" disabled>
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                Double
+                </span>
+            </button>
+        </div>
     </div>
 
     <div style="z-index: 3; height: 947px; background-color: #00382c; position: relative; box-shadow: 0px -2px 44px -12px rgba(0,0,0,0.75);" id="listeProjet">

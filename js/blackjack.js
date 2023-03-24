@@ -124,6 +124,7 @@ function blackjack(cards) {
 // Fonctions jeu
 async function startGame() {
     if (!allReady) {
+        stateButton();
         scoreReset();
         cleanBoard();
         cleanBoardCroupier();
@@ -185,6 +186,8 @@ async function startGame() {
             finish("perdu");
             allReady = false;
         }
+
+        stateButton();
     } else {
         console.log("La partie est déjà lancée !")
     }
@@ -194,6 +197,7 @@ async function hit() {
     if (attent) return;
     if (allReady) {
         attent = true;
+        stateButton();
         playerCards.push(distributeCards(packet, 1)[0]);
         createCarte();
         await sleep(1000);
@@ -213,12 +217,15 @@ async function hit() {
             stand();
         }
         attent = false;
+        stateButton();
     }
 }
 
 async function stand() {
     if (attent) return;
     if (allReady) {
+        attent = true;
+        stateButton();
         returnCarte();
         organiserCroupier();
         score(false, true);
@@ -244,6 +251,8 @@ async function stand() {
         //afficheCards(playerCards, "joueur");
         //afficheCards(croupierCards, "croupier");
         allReady = false;
+        attent = false;
+        stateButton();
     }
 }
 
@@ -284,4 +293,29 @@ function afficheCards(cards, etat) {
 
 function finish(win) {
     console.log("Résultat : " + win);
+}
+
+function stateButton() {
+    let button = document.getElementsByClassName("button-82-pushable");
+    if (allReady) {
+        button[0].disabled = true;
+        if (!attent) {
+            button[1].disabled = false;
+            button[2].disabled = false;
+            if (playerCards.length === 2) {
+                button[3].disabled = false;
+            } else {
+                button[3].disabled = true;
+            }
+        } else {
+            button[1].disabled = true;
+            button[2].disabled = true;
+            button[3].disabled = true;
+        }
+    } else {
+        button[0].disabled = false;
+        button[1].disabled = true;
+        button[2].disabled = true;
+        button[3].disabled = true;
+    }
 }
