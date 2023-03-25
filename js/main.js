@@ -29,7 +29,7 @@ function carteDosProjet() {
                 carte.lastChild.style.color = "red";
             }
             carte.appendChild(document.createElement("img"))
-            carte.lastChild.src = "../img/" + card.couleur + ".png";
+            carte.lastChild.src = "./img/" + card.couleur + ".png";
             carte.lastChild.classList.add("icon-cards");
             carte.style.marginTop = "-30mm";
             carte.id = "carteProjet" + i;
@@ -51,14 +51,14 @@ function carteDosProjet() {
             carte.appendChild(document.createElement("div"));
             carte.lastChild.classList.add("separation");
             carte.appendChild(document.createElement("img"));
-            carte.lastChild.src = "../img/" + projet[j][0] + ".png" ;
+            carte.lastChild.src = "./img/" + projet[j][0] + ".png" ;
             carte.lastChild.classList.add("imgProjet");
             carte.classList.add("carteProjet");
             j++;
         } else {
             carte.classList.add("dosProjet");
             carte.appendChild(document.createElement("img"));
-            carte.lastChild.src = "../img/card-back.png";
+            carte.lastChild.src = "./img/card-back.png";
             carte.lastChild.classList.add("dosProjet");
         }
         carte.style.left = i * 5.6666 + "%";
@@ -86,7 +86,7 @@ function jeuCarteProjet(id, projet) {
     carte.appendChild(document.createElement("div"));
     carte.lastChild.classList.add("separation");
     carte.appendChild(document.createElement("img"));
-    carte.lastChild.src = "../img/" + projet[0] + ".png" ;
+    carte.lastChild.src = "./img/" + projet[0] + ".png" ;
     carte.lastChild.classList.add("imgProjet");
 }
 
@@ -163,7 +163,7 @@ function circulise() {
 
 function createCarte() {
     let carte = document.createElement("img");
-    carte.src = "../img/card-back.png"
+    carte.src = "./img/card-back.png"
     carte.classList.add("carteDos");
     carte.style.bottom = "5%";
 
@@ -205,7 +205,7 @@ function spawnCarteMain(num, val, combientieme) {
     }
 
     laCarte.appendChild(document.createElement("img"));
-    laCarte.children[1].src = "../img/" + val +".png";
+    laCarte.children[1].src = "./img/" + val +".png";
 
     if (uneCarteNormal) {
         laCarte.appendChild(document.createElement("div"));
@@ -214,12 +214,12 @@ function spawnCarteMain(num, val, combientieme) {
 
         if (num === "J" || num === "Q" || num === "K") {
             laCarte.children[2].appendChild(document.createElement("img"));
-            laCarte.children[2].children[0].src = "../img/" + num + " " + val + ".png";
+            laCarte.children[2].children[0].src = "./img/" + num + " " + val + ".png";
             laCarte.children[2].children[0].classList.add("image-icon-entre");
         }
 
         laCarte.appendChild(document.createElement("img"));
-        laCarte.children[3].src = "../img/" + val +".png";
+        laCarte.children[3].src = "./img/" + val +".png";
 
         laCarte.appendChild(document.createElement("p"));
         laCarte.children[4].innerHTML = num;
@@ -261,7 +261,7 @@ function iconCentre(n, val) {
     let icons = [];
     for (let i = 0; i < num; i++) {
         let icon = document.createElement("img");
-        icon.src = "../img/" + val + ".png";
+        icon.src = "./img/" + val + ".png";
         document.getElementById("carte" + n).children[2].appendChild(icon);
         icons.push(icon);
     }
@@ -562,7 +562,7 @@ function spawnCarteCroupier(num, val, hide) {
 
     if (hide) {
         carte.appendChild(document.createElement("img"));
-        carte.lastChild.src = "../img/card-back.png";
+        carte.lastChild.src = "./img/card-back.png";
         carte.lastChild.classList.add("carte");
         dejaSocial = [];
     }else{
@@ -570,7 +570,7 @@ function spawnCarteCroupier(num, val, hide) {
         carte.lastChild.innerHTML = num;
 
         carte.appendChild(document.createElement("img"));
-        carte.lastChild.src = "../img/" + val + ".png";
+        carte.lastChild.src = "./img/" + val + ".png";
         carte.lastChild.classList.add("petit");
 
         if (dejaSocial.length !== 5) {
@@ -580,7 +580,7 @@ function spawnCarteCroupier(num, val, hide) {
             dejaSocial.push(numSocial);
             carte.appendChild(document.createElement("a"));
             carte.lastChild.appendChild(document.createElement("img"));
-            carte.lastChild.lastChild.src = "../img/" + social[numSocial][0];
+            carte.lastChild.lastChild.src = "./img/" + social[numSocial][0];
             carte.lastChild.lastChild.alt = social[numSocial][2];
             carte.lastChild.lastChild.classList.add("reseau");
             carte.lastChild.href = social[numSocial][1];
