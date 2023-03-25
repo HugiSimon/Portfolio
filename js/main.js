@@ -31,7 +31,7 @@ function carteDosProjet() {
             carte.appendChild(document.createElement("img"))
             carte.lastChild.src = "../img/" + card.couleur + ".png";
             carte.lastChild.classList.add("icon-cards");
-            carte.style.marginTop = "60mm";
+            carte.style.marginTop = "-30mm";
             carte.id = "carteProjet" + i;
             carte.appendChild(document.createElement("p"));
             carte.lastChild.innerHTML = projet[j][0];
